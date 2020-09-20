@@ -29,6 +29,18 @@ const Theme = createMuiTheme({
   body2: {
     fontSize: "1rem",
   },
+  overrides: {
+    MuiListItemText: {
+      primary: {
+        fontSize: "1.5rem",
+      },
+    },
+    MuiSvgIcon: {
+      root: {
+        fontSize: "2rem",
+      },
+    },
+  },
 });
 
 export default Theme;

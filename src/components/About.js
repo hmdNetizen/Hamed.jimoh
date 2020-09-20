@@ -14,7 +14,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HighlightOff from "@material-ui/icons/HighlightOff";
 import Home from "@material-ui/icons/Home";
-import Toolbar from "@material-ui/core/Toolbar";
+import ImportantDevices from "@material-ui/icons/ImportantDevices";
+import ListIcon from "@material-ui/icons/List";
+import Build from "@material-ui/icons/Build";
+import Forum from "@material-ui/icons/Forum";
+import VerticalSplit from "@material-ui/icons/VerticalSplit";
+import SvgIcon from "@material-ui/core/SvgIcon";
+
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -94,17 +100,50 @@ const useStyles = makeStyles((theme) => ({
     height: 40,
     color: "#fff",
   },
+  listButton: {
+    paddingLeft: "5em",
+
+    [theme.breakpoints.down("xs")]: {
+      paddingLeft: 0,
+    },
+
+    "&:hover": {
+      background: theme.palette.secondary.light,
+    },
+  },
+
+  listSelected: {
+    background: theme.palette.secondary.light,
+  },
+  listText: {
+    fontSize: "2rem",
+  },
 }));
 
-const About = () => {
+const lists = [
+  { id: 0, label: "Home", icon: Home },
+  { id: 1, label: "Services", icon: ImportantDevices },
+  { id: 2, label: "Portfolio", icon: ListIcon },
+  { id: 3, label: "Resume", icon: VerticalSplit },
+  { id: 4, label: "Skills", icon: Build },
+  { id: 5, label: "Contact", icon: Forum },
+];
+
+const About = (props) => {
+  const { selectedIndex, setSelectedIndex } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
-  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesMDOnly = useMediaQuery(theme.breakpoints.only("md"));
+  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const [openDrawer, setOpenDrawer] = useState(false);
+
+  const onClick = () => {
+    lists.map((list) => console.log(list.icon.displayName));
+  };
 
   return (
     <Grid item container direction="row" className={classes.aboutContainer}>
@@ -122,6 +161,7 @@ const About = () => {
             background: theme.palette.common.gold,
             width: matchesSM ? "100%" : matchesMDOnly ? 90 : 337,
             height: matchesSM ? "10vh" : "100%",
+            zIndex: matchesXS ? undefined : matchesSM ? 1301 : undefined,
           }}
         >
           <Grid
@@ -141,18 +181,14 @@ const About = () => {
               item
               style={{
                 display: matchesMDOnly ? "none" : undefined,
-                position: "relative",
-                zIndex: 99999999999,
               }}
             >
               <Grid
                 container
                 alignItems="center"
+                justify="center"
                 style={{
                   marginTop: matchesSM ? 0 : "1.5em",
-                  marginLeft: matchesSM ? 0 : "5em",
-                  position: "absolute",
-                  zIndex: 9999999,
                 }}
               >
                 <Grid item>
@@ -189,7 +225,8 @@ const About = () => {
             >
               <Avatar
                 alt="Hamed's Photo"
-                src="/assets/logo.png"
+                src="/assets/passport.png"
+                imgProps={{ width: 50 }}
                 className={classes.avatar}
               />
             </Grid>
@@ -280,13 +317,79 @@ const About = () => {
             >
               <HighlightOff className={classes.close} />
             </IconButton>
-            <List>
-              <ListItem>
-                <ListItemIcon>
-                  <Home />
-                </ListItemIcon>
-                <ListItemText primary="Home" />
-              </ListItem>
+            <Grid
+              container
+              alignItems="center"
+              justify="center"
+              style={{
+                marginTop: matchesSM ? 0 : "1.5em",
+              }}
+            >
+              <Grid item>
+                <Typography
+                  variant="body1"
+                  style={{
+                    fontWeight: 700,
+                    color: theme.palette.common.tan,
+                  }}
+                >
+                  01
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Divider className={classes.divider} />
+              </Grid>
+              <Grid item>
+                <Typography
+                  variant="body1"
+                  style={{ fontWeight: 700, color: "#fff" }}
+                >
+                  06
+                </Typography>
+              </Grid>
+            </Grid>
+            <List
+              style={{
+                marginTop: "2em",
+              }}
+            >
+              {lists.map((list) => (
+                <ListItem
+                  key={list.id}
+                  button
+                  divider
+                  classes={{
+                    root: classes.listButton,
+                    focusVisible: classes.focus,
+                    selected: classes.listSelected,
+                  }}
+                  selected={selectedIndex === list.id}
+                  onClick={() => {
+                    setSelectedIndex(list.id);
+                    setOpenDrawer(false);
+                  }}
+                >
+                  <ListItemIcon>
+                    {list.icon.displayName === "HomeIcon" ? (
+                      <Home />
+                    ) : list.icon.displayName === "ImportantDevicesIcon" ? (
+                      <ImportantDevices />
+                    ) : list.icon.displayName === "ListIcon" ? (
+                      <ListIcon />
+                    ) : list.icon.displayName === "VerticalSplitIcon" ? (
+                      <VerticalSplit />
+                    ) : list.icon.displayName === "BuildIcon" ? (
+                      <Build />
+                    ) : list.icon.displayName === "ForumIcon" ? (
+                      <Forum />
+                    ) : null}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={list.label}
+                    classes={{ root: classes.listText }}
+                  />
+                </ListItem>
+              ))}
             </List>
           </SwipeableDrawer>
         </Grid>

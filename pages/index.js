@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,9 +13,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Homepage = () => {
   const classes = useStyles();
+  const [selectedIndex, setSelectedIndex] = useState(0);
   return (
     <Grid container direction="column" style={{ height: 2500 }}>
-      <About />
+      <About
+        selectedIndex={selectedIndex}
+        setSelectedIndex={setSelectedIndex}
+      />
     </Grid>
   );
 };
