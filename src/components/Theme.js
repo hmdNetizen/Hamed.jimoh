@@ -32,12 +32,12 @@ const Theme = createMuiTheme({
   overrides: {
     MuiListItemText: {
       primary: {
-        fontSize: "1.5rem",
+        fontSize: "2rem",
       },
     },
     MuiSvgIcon: {
       root: {
-        fontSize: "2rem",
+        fontSize: "3rem",
       },
     },
   },
