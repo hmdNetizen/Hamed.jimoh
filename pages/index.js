@@ -4,11 +4,15 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import About from "../src/components/About";
 import Services from "../src/components/Services";
+import Portfolio from "../src/components/Portfolio";
 
 const useStyles = makeStyles((theme) => ({
   aboutContainer: {
     height: "100vh",
     width: "100%",
+  },
+  bodyContainer: {
+    background: theme.palette.common.darkBrown,
   },
 }));
 
@@ -25,7 +29,10 @@ const Homepage = () => {
         pageCounter={pageCounter}
         setPageCounter={setPageCounter}
       />
-      <Services />
+      <Grid className={classes.bodyContainer}>
+        <Services />
+        <Portfolio />
+      </Grid>
     </Grid>
   );
 };

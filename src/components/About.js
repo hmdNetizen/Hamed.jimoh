@@ -46,8 +46,13 @@ const useStyles = makeStyles((theme) => ({
 
   middleGrid: {
     backgroundColor: theme.palette.common.dollar,
-    paddingLeft: "5em",
-    paddingRight: "5em",
+    paddingLeft: "4em",
+    paddingRight: "4em",
+
+    [theme.breakpoints.down("md")]: {
+      paddingLeft: "3em",
+      paddingRight: "3em",
+    },
 
     [theme.breakpoints.down("sm")]: {
       paddingTop: "3em",
@@ -140,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "2rem",
   },
   nameStyle: {
-    fontSize: "4.5rem",
+    fontSize: "4.25rem",
     fontWeight: 800,
     color: theme.palette.common.brown,
 
@@ -300,7 +305,7 @@ const About = (props) => {
               item
               container
               direction="column"
-              style={{ marginLeft: "5em" }}
+              style={{ marginLeft: "2em" }}
             >
               <Grid item>
                 <Typography variant="body2" className={classes.title}>
@@ -318,7 +323,7 @@ const About = (props) => {
               container
               direction="column"
               style={{
-                marginLeft: "5em",
+                marginLeft: "2em",
                 marginTop: "2em",
                 marginBottom: "2em",
               }}
@@ -338,7 +343,7 @@ const About = (props) => {
               item
               container
               direction="column"
-              style={{ marginLeft: "5em", marginBottom: "2em" }}
+              style={{ marginLeft: "2em", marginBottom: "2em" }}
             >
               <Grid item>
                 <Typography variant="body2" className={classes.title}>
@@ -355,7 +360,7 @@ const About = (props) => {
               item
               container
               direction="column"
-              style={{ marginLeft: "5em" }}
+              style={{ marginLeft: "2em" }}
             >
               <Grid item>
                 <Typography variant="body2" className={classes.title}>
@@ -498,14 +503,14 @@ const About = (props) => {
               ? "2em"
               : matchesMD
               ? "1em"
-              : "2em",
+              : "1em",
           }}
         >
           <Typography
             variant="body1"
             paragraph
             style={{
-              fontSize: matchesXS ? "1.2rem" : matchesMD ? "1.5rem" : "2rem",
+              fontSize: matchesXS ? "1.2rem" : matchesMD ? "1.5rem" : "1.75",
               color: theme.palette.primary.dark,
             }}
           >
@@ -534,7 +539,7 @@ const About = (props) => {
             crafted code and user-friendly design and implementation.
           </Typography>
         </Grid>
-        <Grid item style={{ marginLeft: matchesSM ? 0 : "-2em" }}>
+        <Grid item>
           <Grid container justify={matchesMDOnly ? undefined : "center"}>
             {socials.map((social) => (
               <Grid item key={social.id}>
@@ -546,13 +551,33 @@ const About = (props) => {
                 >
                   <IconButton>
                     {social.icon.displayName === "LinkedInIcon" ? (
-                      <LinkedIn style={{ width: matchesXXS && ".7em" }} />
+                      <LinkedIn
+                        style={{
+                          width: matchesXXS ? ".7em" : ".8em",
+                          height: matchesXXS ? ".7em" : ".8em",
+                        }}
+                      />
                     ) : social.icon.displayName === "TwitterIcon" ? (
-                      <Twitter style={{ width: matchesXXS && ".7em" }} />
+                      <Twitter
+                        style={{
+                          width: matchesXXS ? ".7em" : ".8em",
+                          height: matchesXXS ? ".7em" : ".8em",
+                        }}
+                      />
                     ) : social.icon.displayName === "FacebookIcon" ? (
-                      <Facebook style={{ width: matchesXXS && ".7em" }} />
+                      <Facebook
+                        style={{
+                          width: matchesXXS ? ".7em" : ".8em",
+                          height: matchesXXS ? ".7em" : ".8em",
+                        }}
+                      />
                     ) : social.icon.displayName === "InstagramIcon" ? (
-                      <Instagram style={{ width: matchesXXS && ".7em" }} />
+                      <Instagram
+                        style={{
+                          width: matchesXXS ? ".7em" : ".8em",
+                          height: matchesXXS ? ".7em" : ".8em",
+                        }}
+                      />
                     ) : null}
                   </IconButton>
                 </ToolTip>
