@@ -6,6 +6,8 @@
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/styles": "^4.10.0",
+    "animate.css": "^4.1.1",
+    "animate.css-react": "^1.1.0",
     "clsx": "latest",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
@@ -14,7 +16,8 @@
     "next-optimized-images": "^2.6.2",
     "prop-types": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-slick": "^0.27.11"
   },
   "scripts": {
     "dev": "next",

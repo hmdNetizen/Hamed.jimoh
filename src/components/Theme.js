@@ -30,7 +30,21 @@ const Theme = createMuiTheme({
       fontWeight: 700,
       color: tan,
     },
-
+    h4: {
+      fontSize: "2.25rem",
+      fontWeight: 700,
+      color: sandDollar,
+    },
+    h5: {
+      fontSize: "1.75rem",
+      fontWeight: 500,
+      color: sandDollar,
+    },
+    h6: {
+      fontSize: "1.25rem",
+      fontWeight: 500,
+      color: sandDollar,
+    },
     body1: {
       fontSize: "1.2rem",
     },
@@ -58,6 +72,18 @@ const Theme = createMuiTheme({
       padding: {
         paddingTop: 0,
         paddingBottom: 0,
+      },
+    },
+    MuiGrid: {
+      "spacing-xs-3": {
+        width: "100%",
+      },
+    },
+    MuiCssBaseline: {
+      "@global": {
+        html: {
+          scrollBehavior: "smooth",
+        },
       },
     },
   },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -9,8 +9,10 @@ import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  servicesContainer: {
-    // background: theme.palette.common.darkBrown,
+  headerText: {
+    color: theme.palette.common.dollar,
+    fontSize: "1rem",
+    fontWeight: 300,
   },
   card: {
     background: "#594334",
@@ -54,18 +56,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Services = () => {
+const Services = ({ setPageCounter }) => {
   const classes = useStyles();
   const theme = useTheme();
+
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesXXXS = useMediaQuery("(max-width:320px)"); //if screen width is equals or less than 320px
+
+  useEffect(() => {
+    // const pageHeight = document.getElementById("servicesContainer")
+    //   .clientHeight;
+    // console.log("Services section height " + pageHeight);
+
+    const servicesHeight = 2881;
+
+    window.addEventListener(
+      "scroll",
+      (e) => {
+        if (window.pageYOffset > (servicesHeight / 2) * 1.2) {
+          setPageCounter(3);
+        } else if (
+          window.pageYOffset < (servicesHeight / 2) * 1.2 &&
+          window.pageYOffset > 781 / 2
+        ) {
+          setPageCounter(2);
+        } else {
+          setPageCounter(1);
+        }
+      },
+      false
+    );
+  }, [setPageCounter]);
+
   return (
     <Grid
       item
       container
       direction="column"
-      className={classes.servicesContainer}
+      id="servicesContainer"
       style={{ paddingLeft: matchesSM ? 0 : matchesMD ? "8.33333%" : "25%" }}
     >
       <Grid
@@ -73,7 +103,6 @@ const Services = () => {
         direction="column"
         alignItems="center"
         style={{
-          paddingTop: "3em",
           paddingBottom: "5em",
           paddingLeft: matchesXS ? "1em" : "3em",
           paddingRight: matchesXS ? "1em" : "3em",
@@ -108,26 +137,19 @@ const Services = () => {
           <Typography
             variant="body1"
             paragraph
-            style={{ color: theme.palette.common.dollar, fontSize: "1rem" }}
+            className={classes.headerText}
             align={matchesSM ? "center" : undefined}
           >
             I build websites with amazing looks and fast load-times that do one
             thing: Get You Results.
           </Typography>
         </Grid>
-        <Grid
-          item
-          style={{ marginTop: "1em", marginBottom: "1em", fontWeight: 300 }}
-        >
+        <Grid item style={{ marginTop: "1em", marginBottom: "1em" }}>
           <Typography
             variant="body1"
             paragraph
             align={matchesSM ? "center" : undefined}
-            style={{
-              color: theme.palette.common.dollar,
-              fontSize: "1rem",
-              fontWeight: 300,
-            }}
+            className={classes.headerText}
           >
             Whatever you have in mind, you should know - I build with a
             goal-oriented eye for precision.
@@ -138,11 +160,7 @@ const Services = () => {
             variant="body1"
             paragraph
             align={matchesSM ? "center" : undefined}
-            style={{
-              color: theme.palette.common.dollar,
-              fontSize: "1rem",
-              fontWeight: 300,
-            }}
+            className={classes.headerText}
           >
             When we're done, you will have a site that gets the job done in
             style.
@@ -163,12 +181,20 @@ const Services = () => {
               marginBottom: matchesSM ? "3em" : 0,
             }}
           >
-            <Button variant="outlined" className={classes.button}>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              style={{ padding: matchesXXXS && ".25em 1em" }}
+            >
               Download my CV
             </Button>
           </Grid>
           <Grid item>
-            <Button variant="outlined" className={classes.button}>
+            <Button
+              variant="outlined"
+              className={classes.button}
+              style={{ padding: matchesXXXS && ".5em 1em" }}
+            >
               Check my Portfolio
             </Button>
           </Grid>

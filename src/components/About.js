@@ -55,10 +55,12 @@ const useStyles = makeStyles((theme) => ({
     },
 
     [theme.breakpoints.down("sm")]: {
-      paddingTop: "3em",
+      paddingTop: "2em",
+      paddingBottom: "2em",
     },
 
     [theme.breakpoints.down("xs")]: {
+      marginTop: "10vh",
       paddingLeft: "2.5em",
       paddingRight: "2.5em",
     },
@@ -100,6 +102,11 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: 150,
     height: 150,
+
+    [theme.breakpoints.down("xs")]: {
+      width: 100,
+      height: 100,
+    },
   },
   drawer: {
     width: "25%",
@@ -174,12 +181,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const lists = [
-  { id: 1, pageCount: "01", label: "Home", icon: Home },
-  { id: 2, pageCount: "02", label: "Services", icon: ImportantDevices },
-  { id: 3, pageCount: "03", label: "Portfolio", icon: ListIcon },
-  { id: 4, pageCount: "04", label: "Resume", icon: VerticalSplit },
-  { id: 5, pageCount: "05", label: "Skills", icon: Build },
-  { id: 6, pageCount: "06", label: "Contact", icon: Forum },
+  { id: 1, pageCount: "01", label: "Home", icon: Home, link: "#homepage" },
+  {
+    id: 2,
+    pageCount: "02",
+    label: "Services",
+    icon: ImportantDevices,
+    link: "#services",
+  },
+  {
+    id: 3,
+    pageCount: "03",
+    label: "Portfolio",
+    icon: ListIcon,
+    link: "#portfolio",
+  },
+  {
+    id: 4,
+    pageCount: "04",
+    label: "Resume",
+    icon: VerticalSplit,
+    link: "#resume",
+  },
+  { id: 5, pageCount: "05", label: "Skills", icon: Build, link: "#skills" },
+  { id: 6, pageCount: "06", label: "Contact", icon: Forum, link: "#contact" },
 ];
 
 const socials = [
@@ -203,13 +228,38 @@ const About = (props) => {
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
-  const matchesXXS = useMediaQuery("(max-width:450px)");
+  const matchesXXS = useMediaQuery("(max-width:450px)"); //if screen width is equals or less than 450px
+  const matchesXXXS = useMediaQuery("(max-width:320px)"); //if screen width is equals or less than 320px
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  useEffect(() => {
+    const pageHeight = document.getElementById("homepage").clientHeight;
+    console.log("About Page Height " + pageHeight);
+    const aboutHeight = 781;
+    window.addEventListener(
+      "scroll",
+      (e) => {
+        if (window.pageYOffset > (aboutHeight / 2) * 1.2) {
+          setPageCounter(2);
+        } else if (window.pageYOffset < (aboutHeight / 2) * 1.2) {
+          setPageCounter(1);
+        }
+      },
+      false
+    );
+  }, [setPageCounter]);
+
   return (
-    <Grid item container direction="row" className={classes.aboutContainer}>
+    <Grid
+      item
+      container
+      direction="row"
+      id="homepage"
+      className={classes.aboutContainer}
+    >
+      {/* Left section grid on medium and large screens but on the top for small and Xsmall screens */}
       <Grid
         item
         className={`${classes.gridUrils} ${classes.leftGrid}`}
@@ -223,7 +273,7 @@ const About = (props) => {
             position: "fixed",
             background: theme.palette.common.gold,
             width: matchesSM ? "100%" : matchesMDOnly ? "8.333333%" : "25%",
-            height: matchesSM ? "10vh" : "100%",
+            height: matchesXXXS ? "8vh" : matchesSM ? "10vh" : "100%",
             zIndex: matchesSM ? 1301 : undefined,
           }}
         >
@@ -234,7 +284,7 @@ const About = (props) => {
             direction={matchesSM ? "row" : "column"}
             style={{
               marginBottom: !matchesSM ? "2em" : 0,
-              marginLeft: matchesSM && "1em",
+              marginLeft: matchesXXXS ? 0 : matchesSM ? "1em" : 0,
             }}
           >
             <Grid item className={classes.menuGrid}>
@@ -242,7 +292,13 @@ const About = (props) => {
                 {matchesSM && openDrawer ? (
                   <HighlightOff className={classes.close} />
                 ) : (
-                  <MenuOpen className={classes.menu} />
+                  <MenuOpen
+                    className={classes.menu}
+                    style={{
+                      width: matchesXXXS && "30px",
+                      height: matchesXXXS && "30px",
+                    }}
+                  />
                 )}
               </IconButton>
             </Grid>
@@ -251,7 +307,7 @@ const About = (props) => {
               style={{
                 display: matchesMDOnly ? "none" : undefined,
                 marginLeft: matchesSM && "auto",
-                marginRight: matchesSM && "4em",
+                marginRight: matchesXXXS ? "1.5em" : matchesSM ? "4em" : 0,
               }}
             >
               <Grid
@@ -268,6 +324,7 @@ const About = (props) => {
                     style={{
                       fontWeight: 700,
                       color: theme.palette.common.tan,
+                      fontSize: matchesXXXS && ".95rem",
                     }}
                   >
                     {`0${pageCounter}`}
@@ -279,7 +336,11 @@ const About = (props) => {
                 <Grid item>
                   <Typography
                     variant="body1"
-                    style={{ fontWeight: 700, color: "#fff" }}
+                    style={{
+                      fontWeight: 700,
+                      color: "#fff",
+                      fontSize: matchesXXXS && ".95rem",
+                    }}
                   >
                     {`0${lists.length}`}
                   </Typography>
@@ -429,6 +490,8 @@ const About = (props) => {
             <List style={{ marginTop: !matchesSM ? "2em" : 0 }}>
               {lists.map((list) => (
                 <ListItem
+                  component="a"
+                  href={list.link}
                   key={list.id}
                   button
                   divider
@@ -469,15 +532,23 @@ const About = (props) => {
           </SwipeableDrawer>
         </Grid>
       </Grid>
+      {/* Middle section grid */}
       <Grid
         item
         container
         direction="column"
-        justify={matchesXS ? "center" : matchesSM ? undefined : "center"}
+        justify={matchesSM ? undefined : "center"}
         alignItems={matchesSM ? "center" : undefined}
         lg={4}
         md={5}
         className={`${classes.gridUtils} ${classes.middleGrid}`}
+        style={{
+          paddingTop: matchesXXXS && "1em",
+          paddingBottom: matchesXXXS && "1em",
+          paddingLeft: matchesXXXS && "1.5em",
+          paddingRight: matchesXXXS && "1.5em",
+          marginTop: matchesXXXS && "8vh",
+        }}
       >
         <Hidden mdUp>
           <Grid
@@ -523,7 +594,12 @@ const About = (props) => {
             paragraph
             className={classes.nameStyle}
             style={{
-              fontSize: matchesXXS && "2rem",
+              fontSize: matchesXXXS
+                ? "1.75rem"
+                : matchesXXS
+                ? "2rem"
+                : undefined,
+              margin: matchesXS ? 0 : undefined,
             }}
           >
             Hamed Jimoh
@@ -531,7 +607,10 @@ const About = (props) => {
         </Grid>
         <Grid
           item
-          style={{ marginTop: "2em", marginBottom: matchesXXS ? "2em" : "4em" }}
+          style={{
+            marginTop: "2em",
+            marginBottom: matchesXXS ? ".5em" : matchesSM ? "1em" : "4em",
+          }}
         >
           <Typography variant="body1" paragraph className={classes.profileText}>
             A frontend web developer from Lagos, Nigeria. I spend a lot of my
@@ -539,7 +618,7 @@ const About = (props) => {
             crafted code and user-friendly design and implementation.
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid item style={{ marginLeft: matchesXXXS && "-1em" }}>
           <Grid container justify={matchesMDOnly ? undefined : "center"}>
             {socials.map((social) => (
               <Grid item key={social.id}>
