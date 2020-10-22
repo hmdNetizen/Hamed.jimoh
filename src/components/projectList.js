@@ -14,6 +14,7 @@ const projectList = [
     ],
     liveURL: "https://hmdnetizen.github.io/search-recipes/",
     repo: "https://github.com/hmdNetizen/search-recipes",
+    functionalities: [],
   },
   {
     id: 1,
@@ -31,7 +32,7 @@ const projectList = [
     ],
     liveURL: "https://hmdnetizen-url-shortener.netlify.app/",
     repo: "https://github.com/hmdNetizen/urlShortener-API",
-    functions: [
+    functionalities: [
       {
         id: 0,
         description:
@@ -51,7 +52,7 @@ const projectList = [
       {
         id: 4,
         description:
-          "Receive an error message when the `form` is submitted if:",
+          "Receive an error message when the 'form' is submitted if:",
         options: [
           "The 'input' field is empty",
           "The typed in URL is not valid",
@@ -75,6 +76,7 @@ const projectList = [
     ],
 
     repo: "https://github.com/hmdNetizen/BookList-App-With-Dark-Mode",
+    functionalities: [],
   },
   {
     id: 3,
@@ -91,6 +93,7 @@ const projectList = [
     ],
     liveURL: "https://easybank-landing-page-lake.vercel.app/",
     repo: "https://github.com/hmdNetizen/EasyBank-Landing-Page",
+    functionalities: [],
   },
   {
     id: 4,
@@ -107,6 +110,7 @@ const projectList = [
     ],
     liveURL: "https://manage-landiing-page.netlify.app/",
     repo: "https://github.com/hmdNetizen/Manage-landing-page",
+    functionalities: [],
   },
   {
     id: 5,
@@ -122,6 +126,7 @@ const projectList = [
       { id: 1, link: "/assets/quiz3.png", alt: "Slide Three" },
     ],
     repo: "https://github.com/hmdNetizen/Quiz-Application",
+    functionalities: [],
   },
 ];
 

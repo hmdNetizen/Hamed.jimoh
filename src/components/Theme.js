@@ -33,17 +33,17 @@ const Theme = createMuiTheme({
     h4: {
       fontSize: "2.25rem",
       fontWeight: 700,
-      color: sandDollar,
+      color: tan,
     },
     h5: {
       fontSize: "1.75rem",
       fontWeight: 500,
-      color: sandDollar,
+      color: tan,
     },
     h6: {
       fontSize: "1.25rem",
       fontWeight: 500,
-      color: sandDollar,
+      color: tan,
     },
     body1: {
       fontSize: "1.2rem",
