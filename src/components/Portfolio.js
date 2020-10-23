@@ -479,7 +479,7 @@ const Portfolio = () => {
                   {project.description}
                 </Typography>
               </Grid>
-              <Grid item>
+              <Grid item container direction="column">
                 <Grid item>
                   <Typography
                     variant="h6"
