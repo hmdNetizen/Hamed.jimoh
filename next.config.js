@@ -1,6 +1,13 @@
-const withOptimizedImages = require("next-optimized-images");
+const withPlugins = require("next-compose-plugins");
+const optimizedImages = require("next-optimized-images");
 
-module.exports = withOptimizedImages({
-  /* config for next-optimized-images */
-  // your config for other plugins or the general next.js here...
-});
+module.exports = withPlugins([
+  [
+    optimizedImages,
+    {
+      /* config for next-optimized-images */
+    },
+  ],
+
+  // your other plugins here
+]);
